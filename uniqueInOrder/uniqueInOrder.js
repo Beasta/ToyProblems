@@ -12,7 +12,39 @@
 //
 //Test - Test.assertSimilar(uniqueInOrder('AAAABBBCCDAABBB'), ['A','B','C','D','A','B'])
 //
-var uniqueInOrder=function(iterable){
+/*var uniqueInOrder=function(iterable){
 //  your code here - remember iterable can be a string or an array
+  var prev;
+  var returnArray=[];
+  if(typeof iterable === 'string'){
+    iterable = iterable.split("");
+  }
+  prev = iterable[0];
+  returnArray.push(prev);
+  for(var i = 1; i < iterable.length; i++){
+    if (iterable[i] !== prev) {
+      prev = iterable[i];
+      returnArray.push(prev);
+    }
+  }
+  return returnArray;
+};*/
 
-}
+var uniqueInOrder=function(iterable){
+  var prev;
+  var returnArray=[];
+    if(typeof iterable === 'string'){
+      iterable = iterable.split("");
+  }
+  if(iterable[0]){
+    prev = iterable[0];
+    returnArray.push(prev);
+    for(var i = 1; i < iterable.length; i++){
+      if (iterable[i] !== prev) {
+        prev = iterable[i];
+        returnArray.push(prev);
+      }
+    }
+  }
+  return returnArray;
+};

@@ -17,7 +17,9 @@
          Arguments (Other languages)
 
      First argument (required): the original string to be converted.
-       Second argument (optional): space-delimited list of minor words that must always be lowercase except for the first word in the string. The JavaScript/CoffeeScript tests will pass undefined when this argument is unused.
+       Second argument (optional):  space-delimited list of minor words that must always be lowercase 
+                                    except for the first word in the string. The JavaScript/CoffeeScript 
+                                    tests will pass undefined when this argument is unused.
  *
  Test.assertEquals(titleCase(''), '')
  Test.assertEquals(titleCase('a clash of KINGS', 'a an the of'), 'A Clash of Kings')
@@ -31,9 +33,32 @@
 function titleCase(title, minorWords) {
   title = title.split(" ");
   if(minorWords){
-    minorWords = minorWords.split(" ")
+    minorWords = minorWords.split(" ");
+    for(var i = 0; i < minorWords.length; i++){
+      minorWords[i]= minorWords[i].toLowerCase();
+    }
+  }else{
+    minorWords = [];
   }
-  return "the title is " + title + "   minor words:" + minorWords;
+  for(var i = 0; i < title.length; i++){
+    var thisWord = title[i].toLowerCase();
+    var checkWord = thisWord;
+    thisWord = thisWord.split("");
+    if(i===0  ||  minorWords.indexOf(checkWord)===-1){
+      //this for loop will capitlize the first letter and lowercase the rest of the letters 
+      for(var j = 0; j < thisWord.length; j++){
+         if (j===0){//this will select and capitlize the first character of a word
+          thisWord[0]=thisWord[0].toUpperCase();
+         }else{//selecting all the other letters in the word
+          //thisWord[j]=thisWord[j].toLowerCase();
+         }
+      }
+    }
+    thisWord = thisWord.join("");//recreate the word by joining the array elements
+    title[i]=thisWord;
+  }
+  title = title.join(" ");
+  return title;
 }
 
 

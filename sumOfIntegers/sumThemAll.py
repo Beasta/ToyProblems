@@ -1,0 +1,62 @@
+'''Complete the given function sumOfIntegers to return the sum of n integers.
+
+Input:
+The first line will contain an integer n, which gives the number of integers in the array.
+The next line will contain n line separated integers.
+
+Constraint:
+The sum will not exceed the number that can be represented in a long int data type. 
+
+Sample Input #1:
+
+5
+1
+2
+3
+4
+5
+
+Sample Output #1:
+15
+
+Sample Input #2:
+2
+12
+12
+
+Sample Output #2:
+24
+
+-----------------------------------'''
+#!/bin/python
+
+import sys
+import os
+
+'''--------------------------------'''
+
+# Complete the function below.
+
+
+def  sumOfIntegers( arr):
+    return sum(arr)
+    
+
+'''---------------------------------'''
+
+f = open(os.environ['OUTPUT_PATH'], 'w')
+    
+
+_arr_cnt = int(raw_input())
+_arr_i=0
+_arr = []
+while _arr_i < _arr_cnt:
+    _arr_item = int(raw_input());
+    _arr.append(_arr_item)
+    _arr_i+=1
+    
+
+res = sumOfIntegers(_arr);
+f.write(str(res) + "\n")
+
+f.close()

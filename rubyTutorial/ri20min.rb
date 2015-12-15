@@ -13,7 +13,7 @@ class MegaGreeter
   def say_hi
     if @names.nil?
       puts "..."
-    elseif @names.respond_to?("each")
+    elsif @names.respond_to?("each")
       # @names is a list of some kind, iterate!
       @names.each do |name|
         puts "Hello #{name}!"
@@ -27,7 +27,7 @@ class MegaGreeter
   def say_bye
     if @names.nil?
       puts "..." 
-    elseif @names.respond_to?("join")
+    elsif @names.respond_to?("join")
       # Join the list elements with commas
       puts "Goodbye #{@names.join(", ")}. Come back soon!"
     else  
@@ -36,6 +36,8 @@ class MegaGreeter
   end
 end
 
+# the following if checks to see if this is the main file being used
+# it allows the above class to be used in other contexts without being executed
 if __FILE__ == $0
   mg = MegaGreeter.new
   mg.say_hi
@@ -55,3 +57,5 @@ if __FILE__ == $0
   mg.say_hi
   mg.say_bye
 end
+
+# run by executing '''ruby ri20min.rb'''

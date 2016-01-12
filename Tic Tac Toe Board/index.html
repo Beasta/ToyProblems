@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body ng-app = 'ticToe'>
+    <table ng-controller = 'board'>
+      <tr ng-repeat='row in board' ng-init='thisRow = $index'>
+        <td ng-repeat = 'column in row track by $index' ng-click='aClick(thisRow,$index)'>
+          [{{column}}]
+        </td>
+      </tr>
+    </table>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js'></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

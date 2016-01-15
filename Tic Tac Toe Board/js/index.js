@@ -2,6 +2,8 @@ var app = angular.module('ticToe',[]);
 app.controller('board',['$scope',function($scope){
   $scope.xTurn = true;
 
+  $scope.boardActive = true;
+  
   $scope.initialize = function(){
     $scope.board =  _.range(3).map(function(){
      return _.range(3).map(function(){
@@ -16,8 +18,9 @@ app.controller('board',['$scope',function($scope){
     if($scope.board[thisRow][thisColumn]===" "){
       var token = $scope.xTurn ? 'x' : 'o';
       $scope.board[thisRow][thisColumn] = token;
-      $scope.xTurn = !$scope.xTurn;
       console.log($scope.logic(token));
+      $scope.statusUpdate();
+      $scope.xTurn = !$scope.xTurn;
     }
   };
   
@@ -40,4 +43,13 @@ app.controller('board',['$scope',function($scope){
     });
   };
   
+  $scope.statusUpdate = function(){ 
+    var token = ($scope.xTurn ? 'x' : 'o');
+    if($scope.logic(token)){
+      $scope.gameStatus ='Player ' + token + " wins!";
+    }else{
+      $scope.gameStatus = "It is player " + token + "'s turn";
+    }
+  };
+
 }]);

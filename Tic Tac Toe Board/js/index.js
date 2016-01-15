@@ -1,27 +1,29 @@
-var board = _.range(3).map(function(){
- return _.range(3).map(function(){
-   return " ";
- });
-});
-
-var xTurn = true; //start the game on x's turn
-var logic = function(token){ 
-  return _.any(board,function(row){//testing for winner on any row
-    return _.every(row,function(column){
-      return column === token;
-    });
-  });
-};
-
 var app = angular.module('ticToe',[]);
 app.controller('board',['$scope',function($scope){
-  $scope.board = board;
+  
+
+  $scope.xTurn = true;
+  $scope.initialize = function(){
+    $scope.board =  _.range(3).map(function(){
+     return _.range(3).map(function(){
+       return " ";
+     });
+    });
+  };
+  $scope.initialize();
   $scope.aClick = function(thisRow,thisColumn){
-    if(board[thisRow][thisColumn]===" "){
-      var token = xTurn ? 'x' : 'o';
-      board[thisRow][thisColumn] = token;
-      xTurn = !xTurn;
-      console.log(logic(token));
+    if($scope.board[thisRow][thisColumn]===" "){
+      var token = $scope.xTurn ? 'x' : 'o';
+      $scope.board[thisRow][thisColumn] = token;
+      $scope.xTurn = !$scope.xTurn;
+      console.log($scope.logic(token));
     }
+  };
+  $scope.logic = function(token){ 
+    return _.any($scope.board,function(row){//testing for winner on any row
+      return _.every(row,function(column){
+        return column === token;
+      });
+    });
   };
 }]);

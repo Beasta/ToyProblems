@@ -2,25 +2,21 @@ var app = angular.module('ticToe',[]);
 app.controller('board',['$scope',function($scope){
   $scope.xTurn = true;
 
-  $scope.boardActive = true;
-  
   $scope.initialize = function(){
     $scope.board =  _.range(3).map(function(){
      return _.range(3).map(function(){
-       return " ";
+       return "";
      });
     });
+    $scope.boardActive = true;
+    $scope.statusUpdate();
   };
 
-  $scope.initialize();
-
   $scope.aClick = function(thisRow,thisColumn){
-    if($scope.board[thisRow][thisColumn]===" "){
+    if($scope.board[thisRow][thisColumn]==="" && $scope.boardActive){ //check to see if spot is taken and if board is active
       var token = $scope.xTurn ? 'x' : 'o';
-      $scope.board[thisRow][thisColumn] = token;
-      console.log($scope.logic(token));
+      $scope.board[thisRow][thisColumn] = token; 
       $scope.statusUpdate();
-      $scope.xTurn = !$scope.xTurn;
     }
   };
   
@@ -44,12 +40,18 @@ app.controller('board',['$scope',function($scope){
   };
   
   $scope.statusUpdate = function(){ 
-    var token = ($scope.xTurn ? 'x' : 'o');
-    if($scope.logic(token)){
+    var token = $scope.xTurn ? 'x' : 'o'; 
+    if($scope.logic(token)){ //if there is a winner
       $scope.gameStatus ='Player ' + token + " wins!";
-    }else{
+      $scope.boardActive = false;
+    }else{ //still no winner
+      $scope.xTurn = !$scope.xTurn; //other persons turn
+      token = $scope.xTurn ? 'x' : 'o';
       $scope.gameStatus = "It is player " + token + "'s turn";
+      
     }
   };
+
+  $scope.initialize();
 
 }]);

@@ -9,7 +9,7 @@
     <div ng-controller = 'board'>
       <table>
         <tr ng-repeat='row in board' ng-init='thisRow = $index'>
-          <td ng-repeat = 'column in row track by $index' ng-click='aClick(thisRow,$index)'>
+          <td ng-repeat = 'column in row track by $index' ng-click='aClick(thisRow,$index)' ng-disabled = 'boardActive'>
             {{column}}
           </td>
         </tr>
